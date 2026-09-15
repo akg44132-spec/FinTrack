@@ -1,0 +1,1020 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>My Profile | FinTrack</title>
+
+    <!-- Google Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet"
+    >
+
+    <!-- Font Awesome -->
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    >
+
+    <!-- Main CSS -->
+    <link rel="stylesheet" href="style.css">
+
+    <style>
+        /* =========================================
+           PROFILE PAGE
+        ========================================= */
+
+        .profile-page {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .profile-page-header {
+            margin-bottom: 25px;
+        }
+
+        .profile-page-header h1 {
+            font-size: 28px;
+            margin-bottom: 6px;
+        }
+
+        .profile-page-header p {
+            color: var(--text-muted);
+            font-size: 13px;
+        }
+
+        /* Profile Hero */
+
+        .profile-hero {
+            display: flex;
+            align-items: center;
+            gap: 22px;
+            padding: 25px;
+            margin-bottom: 20px;
+
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 18px;
+
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .profile-big-avatar {
+            width: 85px;
+            height: 85px;
+            min-width: 85px;
+
+            border-radius: 50%;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            background: linear-gradient(
+                135deg,
+                var(--primary),
+                #8b85ff
+            );
+
+            color: white;
+            font-size: 30px;
+            font-weight: 800;
+
+            box-shadow:
+                0 12px 30px rgba(99, 102, 241, 0.25);
+        }
+
+        .profile-hero-info h2 {
+            font-size: 21px;
+            margin-bottom: 5px;
+        }
+
+        .profile-hero-info p {
+            color: var(--text-muted);
+            font-size: 12px;
+        }
+
+        .account-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+
+            margin-top: 10px;
+            padding: 5px 9px;
+
+            border-radius: 20px;
+
+            background: var(--green-soft);
+            color: var(--green);
+
+            font-size: 10px;
+            font-weight: 600;
+        }
+
+        /* Main Grid */
+
+        .profile-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .profile-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 18px;
+            padding: 22px;
+        }
+
+        .profile-card.full-width {
+            grid-column: 1 / -1;
+        }
+
+        .profile-card-header {
+            margin-bottom: 20px;
+        }
+
+        .profile-card-header h3 {
+            font-size: 15px;
+            margin-bottom: 5px;
+        }
+
+        .profile-card-header p {
+            color: var(--text-muted);
+            font-size: 11px;
+        }
+
+        /* Form */
+
+        .profile-form-group {
+            margin-bottom: 17px;
+        }
+
+        .profile-form-group label {
+            display: block;
+            margin-bottom: 7px;
+
+            color: var(--text-secondary);
+            font-size: 11px;
+            font-weight: 600;
+        }
+
+        .profile-input {
+            width: 100%;
+            height: 44px;
+
+            padding: 0 13px;
+
+            background: var(--bg-card-hover);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+
+            color: var(--text-primary);
+            font-family: inherit;
+            font-size: 12px;
+
+            outline: none;
+            transition: 0.2s ease;
+        }
+
+        .profile-input:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.10);
+        }
+
+        .profile-input:disabled {
+            opacity: 0.65;
+            cursor: not-allowed;
+        }
+
+        /* Save Button */
+
+        .save-profile-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+
+            height: 42px;
+            padding: 0 18px;
+
+            border: none;
+            border-radius: 10px;
+
+            background: linear-gradient(
+                135deg,
+                var(--primary),
+                #8b5cf6
+            );
+
+            color: white;
+            font-family: inherit;
+            font-size: 11px;
+            font-weight: 700;
+
+            cursor: pointer;
+
+            transition: 0.2s ease;
+        }
+
+        .save-profile-btn:hover {
+            transform: translateY(-2px);
+            box-shadow:
+                0 10px 25px rgba(99, 102, 241, 0.25);
+        }
+
+        /* Account Information */
+
+        .account-info-list {
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+        }
+
+        .account-info-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+
+            padding: 12px;
+
+            border-radius: 11px;
+            background: var(--bg-card-hover);
+        }
+
+        .account-info-icon {
+            width: 34px;
+            height: 34px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            border-radius: 9px;
+
+            background: rgba(99, 102, 241, 0.12);
+            color: var(--primary);
+
+            font-size: 12px;
+        }
+
+        .account-info-content {
+            min-width: 0;
+        }
+
+        .account-info-content span {
+            display: block;
+
+            color: var(--text-muted);
+            font-size: 9px;
+
+            margin-bottom: 3px;
+        }
+
+        .account-info-content strong {
+            display: block;
+
+            color: var(--text-primary);
+            font-size: 11px;
+
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        /* Danger Zone */
+
+        .danger-zone {
+            border-color: rgba(239, 68, 68, 0.18);
+        }
+
+        .danger-zone .profile-card-header h3 {
+            color: var(--red);
+        }
+
+        .danger-text {
+            color: var(--text-muted);
+            font-size: 11px;
+            line-height: 1.6;
+            margin-bottom: 15px;
+        }
+
+        .logout-profile-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+
+            padding: 9px 14px;
+
+            border: 1px solid rgba(239, 68, 68, 0.2);
+            border-radius: 9px;
+
+            background: var(--red-soft);
+            color: var(--red);
+
+            font-family: inherit;
+            font-size: 10px;
+            font-weight: 700;
+
+            cursor: pointer;
+        }
+
+        .logout-profile-btn:hover {
+            background: rgba(239, 68, 68, 0.15);
+        }
+
+        /* Back Button */
+
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 7px;
+
+            margin-bottom: 20px;
+
+            color: var(--text-muted);
+            font-size: 11px;
+            text-decoration: none;
+
+            transition: 0.2s ease;
+        }
+
+        .back-link:hover {
+            color: var(--primary);
+        }
+
+        /* Toast */
+
+        .profile-toast {
+            position: fixed;
+            right: 25px;
+            bottom: 25px;
+
+            display: flex;
+            align-items: center;
+            gap: 10px;
+
+            padding: 12px 16px;
+
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+
+            color: var(--text-primary);
+            font-size: 11px;
+
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(10px);
+
+            transition: 0.25s ease;
+            z-index: 2000;
+        }
+
+        .profile-toast.show {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .profile-toast i {
+            color: var(--green);
+        }
+
+        /* Responsive */
+
+        @media (max-width: 800px) {
+
+            .profile-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .profile-card.full-width {
+                grid-column: auto;
+            }
+        }
+
+        @media (max-width: 600px) {
+
+            .profile-hero {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .profile-page-header h1 {
+                font-size: 24px;
+            }
+
+            .profile-big-avatar {
+                width: 75px;
+                height: 75px;
+                min-width: 75px;
+                font-size: 26px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- ============================= -->
+    <!-- SIDEBAR -->
+    <!-- ============================= -->
+
+    <aside class="sidebar">
+
+        <div class="logo">
+
+            <div class="logo-icon">
+                <i class="fa-solid fa-wallet"></i>
+            </div>
+
+            <span>
+                Fin<span class="logo-highlight">Track</span>
+            </span>
+
+        </div>
+
+
+        <nav class="sidebar-nav">
+
+            <p class="nav-title">MAIN</p>
+
+            <a href="index.html" class="nav-link">
+                <i class="fa-solid fa-chart-pie"></i>
+                <span>Dashboard</span>
+            </a>
+
+            <a href="transactions.html" class="nav-link">
+                <i class="fa-solid fa-receipt"></i>
+                <span>Transactions</span>
+            </a>
+
+            <a href="budget.html" class="nav-link">
+                <i class="fa-solid fa-bullseye"></i>
+                <span>Budget</span>
+            </a>
+
+            <a href="analytics.html" class="nav-link">
+                <i class="fa-solid fa-chart-line"></i>
+                <span>Analytics</span>
+            </a>
+
+
+            <p class="nav-title">TOOLS</p>
+
+            <a href="ai-assistant.html" class="nav-link ai-link">
+                <i class="fa-solid fa-wand-magic-sparkles"></i>
+                <span>AI Assistant</span>
+                <span class="new-badge">AI</span>
+            </a>
+
+        </nav>
+
+
+        <div class="sidebar-bottom">
+
+            <div class="tip-card">
+
+                <div class="tip-icon">
+                    <i class="fa-solid fa-lightbulb"></i>
+                </div>
+
+                <div>
+                    <h4>Smart Tip</h4>
+                    <p>
+                        Track every expense to understand your
+                        spending habits.
+                    </p>
+                </div>
+
+            </div>
+
+        </div>
+
+    </aside>
+
+
+    <!-- ============================= -->
+    <!-- MAIN CONTENT -->
+    <!-- ============================= -->
+
+    <main class="main-content">
+
+        <!-- HEADER -->
+
+        <header class="top-header">
+
+            <button class="mobile-menu" id="mobileMenu">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+
+
+            <div class="page-heading">
+
+                <p class="greeting">
+                    Account Settings 👤
+                </p>
+
+                <h1>My Profile</h1>
+
+            </div>
+
+
+            <div class="header-actions">
+
+                <a
+                    href="index.html"
+                    class="back-link"
+                    style="margin: 0;"
+                >
+                    <i class="fa-solid fa-arrow-left"></i>
+                    Dashboard
+                </a>
+
+            </div>
+
+        </header>
+
+
+        <!-- PAGE -->
+
+        <div class="profile-page">
+
+            <div class="profile-page-header">
+
+                <h1>Profile & Account</h1>
+
+                <p>
+                    Manage your personal information and account details.
+                </p>
+
+            </div>
+
+
+            <!-- PROFILE HERO -->
+
+            <section class="profile-hero">
+
+                <div
+                    class="profile-big-avatar"
+                    id="profileAvatar"
+                >
+                    U
+                </div>
+
+
+                <div class="profile-hero-info">
+
+                    <h2 id="profileName">
+                        User
+                    </h2>
+
+                    <p id="profileEmail">
+                        user@example.com
+                    </p>
+
+                    <span class="account-badge">
+                        <i class="fa-solid fa-circle-check"></i>
+                        Active Account
+                    </span>
+
+                </div>
+
+            </section>
+
+
+            <!-- GRID -->
+
+            <div class="profile-grid">
+
+                <!-- EDIT PROFILE -->
+
+                <section class="profile-card">
+
+                    <div class="profile-card-header">
+
+                        <h3>
+                            <i class="fa-solid fa-user-pen"></i>
+                            Personal Information
+                        </h3>
+
+                        <p>
+                            Update your profile information.
+                        </p>
+
+                    </div>
+
+
+                    <form id="profileForm">
+
+                        <div class="profile-form-group">
+
+                            <label for="profileNameInput">
+                                Full Name
+                            </label>
+
+                            <input
+                                type="text"
+                                id="profileNameInput"
+                                class="profile-input"
+                                placeholder="Enter your name"
+                                required
+                            >
+
+                        </div>
+
+
+                        <div class="profile-form-group">
+
+                            <label for="profileEmailInput">
+                                Email Address
+                            </label>
+
+                            <input
+                                type="email"
+                                id="profileEmailInput"
+                                class="profile-input"
+                                disabled
+                            >
+
+                        </div>
+
+
+                        <button
+                            type="submit"
+                            class="save-profile-btn"
+                        >
+                            <i class="fa-solid fa-floppy-disk"></i>
+                            Save Changes
+                        </button>
+
+                    </form>
+
+                </section>
+
+
+                <!-- ACCOUNT DETAILS -->
+
+                <section class="profile-card">
+
+                    <div class="profile-card-header">
+
+                        <h3>
+                            <i class="fa-solid fa-circle-info"></i>
+                            Account Information
+                        </h3>
+
+                        <p>
+                            Your FinTrack account details.
+                        </p>
+
+                    </div>
+
+
+                    <div class="account-info-list">
+
+                        <div class="account-info-item">
+
+                            <div class="account-info-icon">
+                                <i class="fa-solid fa-envelope"></i>
+                            </div>
+
+                            <div class="account-info-content">
+
+                                <span>Email</span>
+
+                                <strong id="accountEmail">
+                                    —
+                                </strong>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="account-info-item">
+
+                            <div class="account-info-icon">
+                                <i class="fa-solid fa-calendar"></i>
+                            </div>
+
+                            <div class="account-info-content">
+
+                                <span>Account Created</span>
+
+                                <strong id="accountCreated">
+                                    —
+                                </strong>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="account-info-item">
+
+                            <div class="account-info-icon">
+                                <i class="fa-solid fa-shield-halved"></i>
+                            </div>
+
+                            <div class="account-info-content">
+
+                                <span>Account Status</span>
+
+                                <strong>
+                                    Active
+                                </strong>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </section>
+
+
+                <!-- DANGER ZONE -->
+
+                <section class="profile-card full-width danger-zone">
+
+                    <div class="profile-card-header">
+
+                        <h3>
+                            <i class="fa-solid fa-triangle-exclamation"></i>
+                            Account Actions
+                        </h3>
+
+                        <p>
+                            Manage your current session.
+                        </p>
+
+                    </div>
+
+
+                    <p class="danger-text">
+                        Logging out will end your current FinTrack session
+                        and return you to the login page.
+                    </p>
+
+
+                    <button
+                        type="button"
+                        class="logout-profile-btn"
+                        id="profileLogoutBtn"
+                    >
+                        <i class="fa-solid fa-right-from-bracket"></i>
+                        Logout
+                    </button>
+
+                </section>
+
+            </div>
+
+        </div>
+
+
+        <!-- FOOTER -->
+
+        <footer class="footer">
+
+            <p>
+                © 2026 FinTrack. Built for smarter
+                financial decisions.
+            </p>
+
+            <div class="footer-links">
+
+                <a href="#">Privacy</a>
+                <a href="#">Terms</a>
+                <a href="#">Help</a>
+
+            </div>
+
+        </footer>
+
+    </main>
+
+
+    <!-- TOAST -->
+
+    <div
+        class="profile-toast"
+        id="profileToast"
+    >
+        <i class="fa-solid fa-circle-check"></i>
+        <span id="profileToastText">
+            Profile updated successfully.
+        </span>
+    </div>
+
+
+    <!-- AUTH -->
+
+    <script src="auth.js"></script>
+
+
+    <!-- PROFILE JS -->
+
+    <script>
+
+        document.addEventListener("DOMContentLoaded", () => {
+
+            const user =
+                window.FinTrackAuth?.getUser();
+
+            if (!user) {
+                return;
+            }
+
+
+            /* =============================
+               ELEMENTS
+            ============================= */
+
+            const profileName =
+                document.getElementById("profileName");
+
+            const profileEmail =
+                document.getElementById("profileEmail");
+
+            const profileAvatar =
+                document.getElementById("profileAvatar");
+
+            const nameInput =
+                document.getElementById("profileNameInput");
+
+            const emailInput =
+                document.getElementById("profileEmailInput");
+
+            const accountEmail =
+                document.getElementById("accountEmail");
+
+            const accountCreated =
+                document.getElementById("accountCreated");
+
+            const profileForm =
+                document.getElementById("profileForm");
+
+            const logoutBtn =
+                document.getElementById("profileLogoutBtn");
+
+            const toast =
+                document.getElementById("profileToast");
+
+            const toastText =
+                document.getElementById("profileToastText");
+
+
+            /* =============================
+               DISPLAY USER
+            ============================= */
+
+            function displayUser(currentUser) {
+
+                const name =
+                    currentUser.name || "User";
+
+                const email =
+                    currentUser.email || "";
+
+                profileName.textContent = name;
+
+                profileEmail.textContent = email;
+
+                profileAvatar.textContent =
+                    name.charAt(0).toUpperCase();
+
+                nameInput.value = name;
+
+                emailInput.value = email;
+
+                accountEmail.textContent = email;
+
+
+                if (currentUser.createdAt) {
+
+                    const date =
+                        new Date(currentUser.createdAt);
+
+                    accountCreated.textContent =
+                        date.toLocaleDateString(
+                            "en-IN",
+                            {
+                                day: "2-digit",
+                                month: "short",
+                                year: "numeric"
+                            }
+                        );
+
+                } else {
+
+                    accountCreated.textContent =
+                        "Not available";
+
+                }
+
+            }
+
+
+            displayUser(user);
+
+
+            /* =============================
+               SAVE PROFILE
+            ============================= */
+
+            profileForm.addEventListener(
+                "submit",
+                (event) => {
+
+                    event.preventDefault();
+
+                    const newName =
+                        nameInput.value.trim();
+
+                    if (newName.length < 2) {
+
+                        showToast(
+                            "Please enter a valid name."
+                        );
+
+                        return;
+                    }
+
+
+                    const updatedUser = {
+                        ...user,
+                        name: newName
+                    };
+
+
+                    localStorage.setItem(
+                        "fintrack_user",
+                        JSON.stringify(updatedUser)
+                    );
+
+
+                    displayUser(updatedUser);
+
+
+                    /* Update dashboard/profile UI */
+                    if (window.FinTrackAuth) {
+                        window.FinTrackAuth.updateUserUI();
+                    }
+
+
+                    showToast(
+                        "Profile updated successfully."
+                    );
+
+                }
+            );
+
+
+            /* =============================
+               LOGOUT
+            ============================= */
+
+            logoutBtn.addEventListener(
+                "click",
+                () => {
+
+                    window.FinTrackAuth.logout();
+
+                }
+            );
+
+
+            /* =============================
+               TOAST
+            ============================= */
+
+            function showToast(message) {
+
+                toastText.textContent = message;
+
+                toast.classList.add("show");
+
+                setTimeout(() => {
+
+                    toast.classList.remove("show");
+
+                }, 2500);
+
+            }
+
+        });
+
+    </script>
+
+</body>
+</html>

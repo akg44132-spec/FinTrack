@@ -1,0 +1,1118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Settings | FinTrack</title>
+
+    <!-- Google Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet"
+    >
+
+    <!-- Font Awesome -->
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    >
+
+    <!-- Main CSS -->
+    <link rel="stylesheet" href="style.css">
+
+    <style>
+
+        /* =========================================
+           SETTINGS PAGE
+        ========================================= */
+
+        .settings-page {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .settings-header {
+            margin-bottom: 25px;
+        }
+
+        .settings-header h1 {
+            font-size: 28px;
+            margin-bottom: 6px;
+        }
+
+        .settings-header p {
+            color: var(--text-muted);
+            font-size: 13px;
+        }
+
+
+        /* Settings Card */
+
+        .settings-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 18px;
+            padding: 22px;
+            margin-bottom: 18px;
+        }
+
+        .settings-card-header {
+            margin-bottom: 18px;
+        }
+
+        .settings-card-header h3 {
+            font-size: 15px;
+            margin-bottom: 5px;
+        }
+
+        .settings-card-header p {
+            color: var(--text-muted);
+            font-size: 11px;
+        }
+
+
+        /* Setting Item */
+
+        .setting-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+
+            padding: 15px 0;
+
+            border-bottom: 1px solid var(--border);
+        }
+
+        .setting-item:last-child {
+            border-bottom: none;
+            padding-bottom: 0;
+        }
+
+        .setting-item:first-child {
+            padding-top: 0;
+        }
+
+
+        .setting-info {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+
+        .setting-icon {
+            width: 38px;
+            height: 38px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            border-radius: 10px;
+
+            background: rgba(99, 102, 241, 0.12);
+            color: var(--primary);
+
+            font-size: 13px;
+            flex-shrink: 0;
+        }
+
+
+        .setting-text h4 {
+            color: var(--text-primary);
+            font-size: 12px;
+            margin-bottom: 4px;
+        }
+
+        .setting-text p {
+            color: var(--text-muted);
+            font-size: 10px;
+            line-height: 1.5;
+        }
+
+
+        /* Select */
+
+        .settings-select {
+            min-width: 140px;
+            height: 38px;
+
+            padding: 0 10px;
+
+            border-radius: 9px;
+            border: 1px solid var(--border);
+
+            background: var(--bg-card-hover);
+            color: var(--text-primary);
+
+            font-family: inherit;
+            font-size: 11px;
+
+            outline: none;
+            cursor: pointer;
+        }
+
+        .settings-select:focus {
+            border-color: var(--primary);
+        }
+
+
+        /* Toggle */
+
+        .toggle {
+            position: relative;
+
+            width: 45px;
+            height: 24px;
+
+            flex-shrink: 0;
+        }
+
+        .toggle input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .toggle-slider {
+            position: absolute;
+            inset: 0;
+
+            background: var(--border);
+
+            border-radius: 30px;
+
+            cursor: pointer;
+
+            transition: 0.25s ease;
+        }
+
+        .toggle-slider::before {
+            content: "";
+
+            position: absolute;
+
+            width: 18px;
+            height: 18px;
+
+            left: 3px;
+            top: 3px;
+
+            background: white;
+            border-radius: 50%;
+
+            transition: 0.25s ease;
+        }
+
+        .toggle input:checked + .toggle-slider {
+            background: var(--primary);
+        }
+
+        .toggle input:checked + .toggle-slider::before {
+            transform: translateX(21px);
+        }
+
+
+        /* Save */
+
+        .save-settings-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+
+            height: 42px;
+            padding: 0 18px;
+
+            border: none;
+            border-radius: 10px;
+
+            background: linear-gradient(
+                135deg,
+                var(--primary),
+                #8b5cf6
+            );
+
+            color: white;
+
+            font-family: inherit;
+            font-size: 11px;
+            font-weight: 700;
+
+            cursor: pointer;
+
+            transition: 0.2s ease;
+        }
+
+        .save-settings-btn:hover {
+            transform: translateY(-2px);
+
+            box-shadow:
+                0 10px 25px rgba(99, 102, 241, 0.25);
+        }
+
+
+        /* Danger Zone */
+
+        .danger-card {
+            border-color: rgba(239, 68, 68, 0.18);
+        }
+
+        .danger-card .settings-card-header h3 {
+            color: var(--red);
+        }
+
+        .danger-action {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+        }
+
+        .danger-action p {
+            color: var(--text-muted);
+            font-size: 10px;
+            line-height: 1.5;
+        }
+
+        .clear-data-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+
+            padding: 9px 14px;
+
+            border: 1px solid rgba(239, 68, 68, 0.2);
+            border-radius: 9px;
+
+            background: var(--red-soft);
+            color: var(--red);
+
+            font-family: inherit;
+            font-size: 10px;
+            font-weight: 700;
+
+            cursor: pointer;
+
+            white-space: nowrap;
+        }
+
+        .clear-data-btn:hover {
+            background: rgba(239, 68, 68, 0.15);
+        }
+
+
+        /* Toast */
+
+        .settings-toast {
+            position: fixed;
+
+            right: 25px;
+            bottom: 25px;
+
+            display: flex;
+            align-items: center;
+            gap: 10px;
+
+            padding: 12px 16px;
+
+            background: var(--bg-card);
+
+            border: 1px solid var(--border);
+            border-radius: 10px;
+
+            box-shadow:
+                0 15px 40px rgba(0, 0, 0, 0.3);
+
+            color: var(--text-primary);
+            font-size: 11px;
+
+            opacity: 0;
+            visibility: hidden;
+
+            transform: translateY(10px);
+
+            transition: 0.25s ease;
+
+            z-index: 2000;
+        }
+
+        .settings-toast.show {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .settings-toast i {
+            color: var(--green);
+        }
+
+
+        /* Mobile */
+
+        @media (max-width: 600px) {
+
+            .settings-header h1 {
+                font-size: 24px;
+            }
+
+            .setting-item {
+                align-items: flex-start;
+            }
+
+            .setting-info {
+                align-items: flex-start;
+            }
+
+            .danger-action {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+        }
+
+    </style>
+</head>
+
+<body>
+
+
+    <!-- ============================= -->
+    <!-- SIDEBAR -->
+    <!-- ============================= -->
+
+    <aside class="sidebar">
+
+        <div class="logo">
+
+            <div class="logo-icon">
+                <i class="fa-solid fa-wallet"></i>
+            </div>
+
+            <span>
+                Fin<span class="logo-highlight">Track</span>
+            </span>
+
+        </div>
+
+
+        <nav class="sidebar-nav">
+
+            <p class="nav-title">MAIN</p>
+
+            <a href="index.html" class="nav-link">
+                <i class="fa-solid fa-chart-pie"></i>
+                <span>Dashboard</span>
+            </a>
+
+            <a href="transactions.html" class="nav-link">
+                <i class="fa-solid fa-receipt"></i>
+                <span>Transactions</span>
+            </a>
+
+            <a href="budget.html" class="nav-link">
+                <i class="fa-solid fa-bullseye"></i>
+                <span>Budget</span>
+            </a>
+
+            <a href="analytics.html" class="nav-link">
+                <i class="fa-solid fa-chart-line"></i>
+                <span>Analytics</span>
+            </a>
+
+
+            <p class="nav-title">TOOLS</p>
+
+            <a href="ai-assistant.html" class="nav-link ai-link">
+                <i class="fa-solid fa-wand-magic-sparkles"></i>
+                <span>AI Assistant</span>
+                <span class="new-badge">AI</span>
+            </a>
+
+        </nav>
+
+
+        <div class="sidebar-bottom">
+
+            <div class="tip-card">
+
+                <div class="tip-icon">
+                    <i class="fa-solid fa-lightbulb"></i>
+                </div>
+
+                <div>
+                    <h4>Smart Tip</h4>
+
+                    <p>
+                        Track every expense to understand your
+                        spending habits.
+                    </p>
+                </div>
+
+            </div>
+
+        </div>
+
+    </aside>
+
+
+    <!-- ============================= -->
+    <!-- MAIN -->
+    <!-- ============================= -->
+
+    <main class="main-content">
+
+
+        <!-- HEADER -->
+
+        <header class="top-header">
+
+            <button class="mobile-menu" id="mobileMenu">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+
+
+            <div class="page-heading">
+
+                <p class="greeting">
+                    Customize your experience ⚙️
+                </p>
+
+                <h1>Settings</h1>
+
+            </div>
+
+
+            <div class="header-actions">
+
+                <a
+                    href="index.html"
+                    class="back-link"
+                    style="margin: 0; color: var(--text-muted); text-decoration: none; font-size: 11px;"
+                >
+                    <i class="fa-solid fa-arrow-left"></i>
+                    Dashboard
+                </a>
+
+            </div>
+
+        </header>
+
+
+        <!-- SETTINGS PAGE -->
+
+        <div class="settings-page">
+
+
+            <div class="settings-header">
+
+                <h1>Preferences</h1>
+
+                <p>
+                    Customize how FinTrack works for you.
+                </p>
+
+            </div>
+
+
+            <!-- APPEARANCE -->
+
+            <section class="settings-card">
+
+                <div class="settings-card-header">
+
+                    <h3>
+                        <i class="fa-solid fa-palette"></i>
+                        Appearance
+                    </h3>
+
+                    <p>
+                        Choose your preferred interface settings.
+                    </p>
+
+                </div>
+
+
+                <!-- THEME -->
+
+                <div class="setting-item">
+
+                    <div class="setting-info">
+
+                        <div class="setting-icon">
+                            <i class="fa-solid fa-moon"></i>
+                        </div>
+
+                        <div class="setting-text">
+
+                            <h4>Dark Mode</h4>
+
+                            <p>
+                                Use the dark interface across FinTrack.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                    <label class="toggle">
+
+                        <input
+                            type="checkbox"
+                            id="darkModeToggle"
+                            checked
+                        >
+
+                        <span class="toggle-slider"></span>
+
+                    </label>
+
+                </div>
+
+            </section>
+
+
+            <!-- FINANCIAL -->
+
+            <section class="settings-card">
+
+                <div class="settings-card-header">
+
+                    <h3>
+                        <i class="fa-solid fa-wallet"></i>
+                        Financial Preferences
+                    </h3>
+
+                    <p>
+                        Configure how financial information is displayed.
+                    </p>
+
+                </div>
+
+
+                <!-- CURRENCY -->
+
+                <div class="setting-item">
+
+                    <div class="setting-info">
+
+                        <div class="setting-icon">
+                            <i class="fa-solid fa-coins"></i>
+                        </div>
+
+                        <div class="setting-text">
+
+                            <h4>Currency</h4>
+
+                            <p>
+                                Select the currency used throughout FinTrack.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                    <select
+                        class="settings-select"
+                        id="currencySelect"
+                    >
+
+                        <option value="INR">
+                            ₹ INR
+                        </option>
+
+                        <option value="USD">
+                            $ USD
+                        </option>
+
+                        <option value="EUR">
+                            € EUR
+                        </option>
+
+                        <option value="GBP">
+                            £ GBP
+                        </option>
+
+                    </select>
+
+                </div>
+
+            </section>
+
+
+            <!-- NOTIFICATIONS -->
+
+            <section class="settings-card">
+
+                <div class="settings-card-header">
+
+                    <h3>
+                        <i class="fa-solid fa-bell"></i>
+                        Notifications
+                    </h3>
+
+                    <p>
+                        Control your FinTrack notifications.
+                    </p>
+
+                </div>
+
+
+                <!-- BUDGET ALERT -->
+
+                <div class="setting-item">
+
+                    <div class="setting-info">
+
+                        <div class="setting-icon">
+                            <i class="fa-solid fa-triangle-exclamation"></i>
+                        </div>
+
+                        <div class="setting-text">
+
+                            <h4>Budget Alerts</h4>
+
+                            <p>
+                                Get notified when spending approaches your limit.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                    <label class="toggle">
+
+                        <input
+                            type="checkbox"
+                            id="budgetAlertToggle"
+                            checked
+                        >
+
+                        <span class="toggle-slider"></span>
+
+                    </label>
+
+                </div>
+
+
+                <!-- SAVING TIPS -->
+
+                <div class="setting-item">
+
+                    <div class="setting-info">
+
+                        <div class="setting-icon">
+                            <i class="fa-solid fa-lightbulb"></i>
+                        </div>
+
+                        <div class="setting-text">
+
+                            <h4>Saving Tips</h4>
+
+                            <p>
+                                Receive personalized saving suggestions.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                    <label class="toggle">
+
+                        <input
+                            type="checkbox"
+                            id="savingTipsToggle"
+                            checked
+                        >
+
+                        <span class="toggle-slider"></span>
+
+                    </label>
+
+                </div>
+
+            </section>
+
+
+            <!-- SAVE -->
+
+            <section class="settings-card">
+
+                <button
+                    type="button"
+                    class="save-settings-btn"
+                    id="saveSettingsBtn"
+                >
+
+                    <i class="fa-solid fa-floppy-disk"></i>
+
+                    Save Settings
+
+                </button>
+
+            </section>
+
+
+            <!-- DANGER -->
+
+            <section class="settings-card danger-card">
+
+                <div class="settings-card-header">
+
+                    <h3>
+                        <i class="fa-solid fa-triangle-exclamation"></i>
+                        Data Management
+                    </h3>
+
+                    <p>
+                        Be careful with these actions.
+                    </p>
+
+                </div>
+
+
+                <div class="danger-action">
+
+                    <p>
+                        Clear all your saved transactions from this browser.
+                        This action cannot be undone.
+                    </p>
+
+
+                    <button
+                        type="button"
+                        class="clear-data-btn"
+                        id="clearDataBtn"
+                    >
+
+                        <i class="fa-solid fa-trash"></i>
+
+                        Clear Transactions
+
+                    </button>
+
+                </div>
+
+            </section>
+
+
+        </div>
+
+
+        <!-- FOOTER -->
+
+        <footer class="footer">
+
+            <p>
+                © 2026 FinTrack. Built for smarter
+                financial decisions.
+            </p>
+
+            <div class="footer-links">
+
+                <a href="#">Privacy</a>
+                <a href="#">Terms</a>
+                <a href="#">Help</a>
+
+            </div>
+
+        </footer>
+
+    </main>
+
+
+    <!-- TOAST -->
+
+    <div
+        class="settings-toast"
+        id="settingsToast"
+    >
+
+        <i class="fa-solid fa-circle-check"></i>
+
+        <span id="settingsToastText">
+            Settings saved successfully.
+        </span>
+
+    </div>
+
+
+    <!-- AUTH -->
+
+    <script src="auth.js"></script>
+
+
+    <!-- SETTINGS JS -->
+
+    <script>
+
+        document.addEventListener(
+            "DOMContentLoaded",
+            () => {
+
+                /* =============================
+                   ELEMENTS
+                ============================= */
+
+                const darkModeToggle =
+                    document.getElementById(
+                        "darkModeToggle"
+                    );
+
+                const currencySelect =
+                    document.getElementById(
+                        "currencySelect"
+                    );
+
+                const budgetAlertToggle =
+                    document.getElementById(
+                        "budgetAlertToggle"
+                    );
+
+                const savingTipsToggle =
+                    document.getElementById(
+                        "savingTipsToggle"
+                    );
+
+                const saveSettingsBtn =
+                    document.getElementById(
+                        "saveSettingsBtn"
+                    );
+
+                const clearDataBtn =
+                    document.getElementById(
+                        "clearDataBtn"
+                    );
+
+                const toast =
+                    document.getElementById(
+                        "settingsToast"
+                    );
+
+                const toastText =
+                    document.getElementById(
+                        "settingsToastText"
+                    );
+
+
+                /* =============================
+                   DEFAULT SETTINGS
+                ============================= */
+
+                const defaultSettings = {
+
+                    darkMode: true,
+
+                    currency: "INR",
+
+                    budgetAlerts: true,
+
+                    savingTips: true
+
+                };
+
+
+                /* =============================
+                   LOAD SETTINGS
+                ============================= */
+
+                function getSettings() {
+
+                    try {
+
+                        const saved =
+                            localStorage.getItem(
+                                "fintrack_settings"
+                            );
+
+                        return saved
+                            ? {
+                                ...defaultSettings,
+                                ...JSON.parse(saved)
+                            }
+                            : defaultSettings;
+
+                    } catch (error) {
+
+                        console.error(
+                            "Unable to load settings:",
+                            error
+                        );
+
+                        return defaultSettings;
+
+                    }
+
+                }
+
+                function applyTheme(isDark) {
+
+    if (isDark) {
+        document.body.classList.remove("light-theme");
+    } else {
+        document.body.classList.add("light-theme");
+    }
+
+}
+
+
+                /* =============================
+                   APPLY SETTINGS
+                ============================= */
+
+               function applySettings(settings) {
+
+                darkModeToggle.checked =
+                    settings.darkMode;
+
+                currencySelect.value =
+                    settings.currency;
+
+                budgetAlertToggle.checked =
+                    settings.budgetAlerts;
+
+                savingTipsToggle.checked =
+                    settings.savingTips;
+
+                applyTheme(
+                    settings.darkMode
+                );
+
+}
+
+
+                /* =============================
+                   INITIAL LOAD
+                ============================= */
+
+                const settings =
+                    getSettings();
+
+                applySettings(settings);
+
+
+                /* =============================
+                   SAVE SETTINGS
+                ============================= */
+
+                darkModeToggle.addEventListener(
+                "change",
+                () => {
+
+                    applyTheme(
+                        darkModeToggle.checked
+                    );
+
+                }
+            );
+
+                saveSettingsBtn.addEventListener(
+                    "click",
+                    () => {
+
+                        const newSettings = {
+
+                            darkMode:
+                                darkModeToggle.checked,
+
+                            currency:
+                                currencySelect.value,
+
+                            budgetAlerts:
+                                budgetAlertToggle.checked,
+
+                            savingTips:
+                                savingTipsToggle.checked
+
+                        };
+
+
+                        localStorage.setItem(
+                            "fintrack_settings",
+                            JSON.stringify(
+                                newSettings
+                            )
+                        );
+
+
+                        showToast(
+                            "Settings saved successfully."
+                        );
+
+                    }
+                );
+
+
+                /* =============================
+                   CLEAR TRANSACTIONS
+                ============================= */
+
+                clearDataBtn.addEventListener(
+                    "click",
+                    () => {
+
+                        const confirmed =
+                            confirm(
+                                "Are you sure you want to delete ALL transactions? This cannot be undone."
+                            );
+
+
+                        if (!confirmed) {
+                            return;
+                        }
+
+
+                        localStorage.removeItem(
+                            "fintrack_transactions"
+                        );
+
+
+                        showToast(
+                            "All transactions have been cleared."
+                        );
+
+                    }
+                );
+
+
+                /* =============================
+                   TOAST
+                ============================= */
+
+                function showToast(message) {
+
+                    toastText.textContent =
+                        message;
+
+                    toast.classList.add("show");
+
+
+                    setTimeout(
+                        () => {
+
+                            toast.classList.remove(
+                                "show"
+                            );
+
+                        },
+                        2500
+                    );
+
+                }
+
+            }
+        );
+
+    </script>
+
+</body>
+</html>
